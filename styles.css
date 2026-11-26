@@ -2,7 +2,7 @@
 :root{
   --black:#1E201F; --white:#fff; --grey:#EFEEEA; --muted:#5E5E5A;
   --hueso:#F7F4EE; --travertino:#E6DDCD; --arena:#C9B79C; --salvia:#4E5B4F; --salvia-claro:#D3DCCF; --grafito:#2B2D2B;
-  --sans:"Jost",ui-sans-serif,system-ui,sans-serif; --serif:"Marcellus",Georgia,serif;
+  --sans:"Jost",ui-sans-serif,system-ui,sans-serif; --serif:"Cormorant Garamond",Georgia,serif; --logo:"Marcellus",Georgia,serif;
   --gut:24px;
 }
 *{box-sizing:border-box}
@@ -31,7 +31,7 @@ svg{display:block}
 .nav{display:flex;gap:26px}
 .nav a{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
 .nav a:hover{text-decoration:underline;text-underline-offset:4px}
-.logo{font-family:var(--serif);font-size:26px;letter-spacing:.2em;white-space:nowrap;padding-left:.2em}
+.logo{font-family:var(--logo);font-size:26px;letter-spacing:.2em;white-space:nowrap;padding-left:.2em}
 .header-right{display:flex;justify-content:flex-end;align-items:center;gap:6px}
 .icon-btn{width:36px;height:36px;display:grid;place-items:center;position:relative}
 .icon-btn svg{width:18px;height:18px}
@@ -51,8 +51,8 @@ svg{display:block}
 .slide-mark{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:min(30vw,420px);height:auto;aspect-ratio:100/120;color:rgba(255,255,255,.1)}
 .slide-copy{position:relative;text-align:center;max-width:960px;padding:0 var(--gut);display:flex;flex-direction:column;align-items:center}
 .kicker{font-size:20px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.7vw,96px);line-height:1.02;letter-spacing:-.01em;margin:22px 0 18px;text-wrap:balance}
-.sub{font-family:var(--serif);font-size:clamp(22px,2.4vw,34px);line-height:1.15}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(50px,7.4vw,108px);line-height:.98;letter-spacing:-.015em;margin:22px 0 18px;text-wrap:balance}
+.sub{font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,38px);line-height:1.15}
 .slide-copy .small{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-top:18px}
 .btn-white{margin-top:28px;background:var(--white);color:var(--black);min-width:170px;height:50px;padding:0 28px;display:inline-grid;place-items:center;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
 .btn-white:hover{background:var(--travertino)}
@@ -68,7 +68,7 @@ svg{display:block}
 .big{padding:28px 0;border-bottom:1px solid #eee}
 .big span{font-size:13px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:0 64px}
 .logos{padding:48px 0}
-.logos span{font-family:var(--serif);font-size:26px;color:#111;padding:0 30px}
+.logos span{font-family:var(--serif);font-weight:500;font-size:30px;color:#111;padding:0 30px}
 .logos i{font-style:normal;font-size:14px}
 @media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
 
@@ -137,12 +137,12 @@ svg{display:block}
 .ed-frame{width:100%;aspect-ratio:1/1.05;overflow:hidden;background:#eee}
 .ed-frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.2)}
 .ed-kicker{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:28px}
-.ed-line{font-family:var(--serif);font-size:18px;margin:18px 0 14px;max-width:44ch}
+.ed-line{font-family:var(--serif);font-weight:500;font-size:21px;margin:18px 0 14px;max-width:44ch}
 .link-under.light{color:var(--white)}
 .ed-small{justify-self:center;width:min(300px,100%);display:flex;flex-direction:column;align-items:flex-end;text-align:right}
 .ed-small img{width:100%;aspect-ratio:1/1.24;object-fit:cover}
 .ed-kicker.dark{margin-top:26px}
-.ed-text{font-family:var(--serif);font-size:15px;line-height:1.45;margin:18px 0 16px}
+.ed-text{font-family:var(--serif);font-weight:500;font-size:17.5px;line-height:1.45;margin:18px 0 16px}
 
 /* 10. Journal */
 .journal{padding:30px 0 60px}
@@ -155,7 +155,7 @@ svg{display:block}
 .j-body{padding:16px 16px 0;display:flex;flex-direction:column;flex:1}
 .j-meta{font-size:9px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
 .j-title{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin:12px 0 12px;line-height:1.35}
-.j-ex{font-family:var(--serif);font-size:15px;line-height:1.45;color:#222}
+.j-ex{font-family:var(--serif);font-weight:500;font-size:17.5px;line-height:1.45;color:#222}
 .j-body .link-under{margin-top:20px;align-self:flex-start}
 
 /* 11. Fila de confianza */
@@ -183,7 +183,7 @@ svg{display:block}
 .f-badge svg{width:96px;height:96px;color:var(--black);margin-left:auto}
 .country{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-top:70px}
 .legal{font-size:10.5px;color:#4A4E48;margin-top:28px;max-width:90ch}
-.f-word{font-family:var(--serif);font-size:15.2vw;line-height:.9;letter-spacing:.02em;white-space:nowrap;text-align:center;margin:24px -1vw -1.6vw;color:var(--black)}
+.f-word{font-family:var(--logo);font-size:15.2vw;line-height:.9;letter-spacing:.02em;white-space:nowrap;text-align:center;margin:24px -1vw -1.6vw;color:var(--black)}
 
 /* Responsive */
 @media (max-width:1100px){
@@ -284,3 +284,5 @@ svg{display:block}
 .hero-left .fig{left:3%;height:90%}
 @media (max-width:560px){.label-top .ph-label{bottom:62px}}
 @media (max-width:560px){.ph .fig-prod{height:52%;align-self:flex-start;margin-top:16%}}
+
+@media (max-width:560px){.logos span{font-size:23px}}
