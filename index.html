@@ -7,13 +7,12 @@
 <meta name="description" content="Livénea Lab: suplementos premium para la longevidad, formulados en Chile y pensados junto a profesionales de clínica estética. Únete a la lista de espera.">
 <meta property="og:title" content="Livénea Lab · Nutrición para la longevidad">
 <meta property="og:description" content="Rituales diarios de mañana, noche y belleza. Únete a la lista de espera.">
-<meta property="og:image" content="/assets/linea-aluminio.jpg">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=2">
+<link rel="stylesheet" href="/styles.css?v=5">
 </head>
 <body>
 
@@ -87,7 +86,7 @@
 <!-- 3. Hero (slideshow) -->
 <section class="hero" aria-roledescription="carrusel">
   <div class="slide on s1">
-    <svg class="slide-mark" aria-hidden="true"><use href="#arco"/></svg>
+    <div class="slide-bg" data-ph="modelo" data-ph-class="hero-right" data-size="Hero · escritorio 2880 × 1234 px (21:9) · móvil 1080 × 1440 px (3:4)"></div>
     <div class="slide-copy">
       <p class="kicker">Nutrición para la longevidad</p>
       <h1>Longevidad que se toma a diario</h1>
@@ -97,7 +96,7 @@
     </div>
   </div>
   <div class="slide s2">
-    <img src="/assets/r-linea.jpg" alt="" aria-hidden="true">
+    <div class="slide-bg" data-ph="conProducto" data-ph-class="hero-left" data-size="Hero · escritorio 2880 × 1234 px (21:9) · móvil 1080 × 1440 px (3:4)"></div>
     <div class="slide-copy">
       <p class="kicker">Membresía Livénea</p>
       <h1>Tu ritual, sin pensar en reponerlo</h1>
@@ -160,24 +159,23 @@
 
 <!-- 8. Accesos por categoría -->
 <section class="tiles" id="rituales" aria-label="Comprar por ritual">
-  <a class="tile t1" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="dia"></span><span class="tile-label">Ritual Día</span></a>
-  <a class="tile t2" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="noche"></span><span class="tile-label">Ritual Noche</span></a>
-  <a class="tile t3" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="belleza"></span><span class="tile-label">Pelo · Uñas · Piel</span></a>
-  <a class="tile t4" href="#tienda" data-tab="pronto"><span class="tile-art" data-pack="creatina"></span><span class="tile-label">Rendimiento</span></a>
+  <a class="tile t1" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-ph="conProducto" data-size="Categoría · 1200 × 1200 px · 1:1"></span><span class="tile-label">Ritual Día</span></a>
+  <a class="tile t2" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-ph="conProducto" data-size="Categoría · 1200 × 1200 px · 1:1"></span><span class="tile-label">Ritual Noche</span></a>
+  <a class="tile t3" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-ph="conProducto" data-size="Categoría · 1200 × 1200 px · 1:1"></span><span class="tile-label">Pelo · Uñas · Piel</span></a>
+  <a class="tile t4" href="#tienda" data-tab="pronto"><span class="tile-art" data-ph="conProducto" data-size="Categoría · 1200 × 1200 px · 1:1"></span><span class="tile-label">Rendimiento</span></a>
 </section>
 
 <!-- 9. Bloque editorial en dos columnas -->
 <section class="editorial" id="clinicas">
   <div class="ed-big">
-    <div class="ed-frame">
-      <img src="/assets/r-caja.jpg" alt="Exhibidor de Livénea Lab con la línea completa bajo un arco de aluminio" loading="lazy">
+    <div class="ed-frame" data-ph="conProducto" data-size="Editorial · 1200 × 1500 px · 4:5">
     </div>
     <p class="ed-kicker">Esto es longevidad</p>
     <p class="ed-line">Nace junto a NCA, una clínica estética con seis sucursales en Santiago.</p>
     <a class="link-under light" href="#newsletter">Quiero venderlo en mi clínica</a>
   </div>
   <div class="ed-small" id="membresia">
-    <img src="/assets/r-electro.jpg" alt="Latas de electrolitos con sobres de recarga de papel" loading="lazy">
+    <div class="ed-img" data-ph="modelo" data-size="Editorial · 900 × 1125 px · 4:5"></div>
     <p class="ed-kicker dark">Rellena. No reemplaces.</p>
     <p class="ed-text">Tu lata de aluminio es para siempre. Con la membresía recibes recargas de papel en casa, pausas cuando quieras y sumas puntos en cada compra.</p>
     <a class="link-under" href="#newsletter">Unirme a la lista</a>
@@ -254,6 +252,6 @@
   <div class="f-word" aria-hidden="true">LIVÉNEA LAB</div>
 </footer>
 
-<script src="/main.js?v=2" defer></script>
+<script src="/main.js?v=5" defer></script>
 </body>
 </html>

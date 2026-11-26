@@ -1,78 +1,54 @@
 // Livénea Lab · interacciones del sitio (sin dependencias)
+// Todas las imágenes son espacios en blanco con modelos ficticios y la medida de la foto final.
 
 const PRODUCTS = [
-  { id: "dia", cat: "dia", name: "Ritual Día", tag: "Colágeno, probióticos y vitaminas para empezar el día.", badge: "Lanzamiento",
-    detail: "Polvo para disolver en agua · 5 g de colágeno · probióticos de 14 cepas · vitamina C y complejo B",
-    pack: { kind: "tin", body: ["#8E7A5C", "#D6C3A0", "#A8916C", "#7A6648"], ink: "#2B2D2B", label: "RITUAL DÍA", sub: "Polvo · 30 porciones" } },
-  { id: "noche", cat: "noche", name: "Ritual Noche", tag: "Colágeno, magnesio, cacao y reishi para cerrar el día.", badge: "Lanzamiento",
-    detail: "Polvo sabor cacao · 5 g de colágeno · magnesio bisglicinato · reishi · sin azúcar añadida",
-    pack: { kind: "tin", body: ["#1F2120", "#4A4D4B", "#333634", "#1B1D1C"], ink: "#E6E2DA", label: "RITUAL NOCHE", sub: "Polvo · 30 porciones" } },
-  { id: "belleza", cat: "belleza", name: "Pelo · Uñas · Piel", tag: "Biotina, zinc, vitaminas y aminoácidos en cápsulas.", badge: "Lanzamiento",
-    detail: "Cápsulas diarias · biotina · zinc bisglicinato · L-cisteína y L-metionina · vitaminas C, E y D3",
-    pack: { kind: "bottle", body: ["#E2D9CA", "#FBF8F2", "#EDE6DA", "#DCD2C2"], ink: "#2B2D2B", label: "PELO · UÑAS · PIEL", sub: "60 cápsulas" } },
-  { id: "creatina", cat: "rendimiento", name: "Creatina", tag: "Monohidrato puro, micronizado.", badge: "Próximamente", soon: true,
-    detail: "Monohidrato de creatina · 300 g · 60 porciones",
-    pack: { kind: "tin", tall: true, body: ["#1F2120", "#4A4D4B", "#333634", "#1B1D1C"], ink: "#C9CCCA", label: "CREATINA", sub: "300 g" } },
-  { id: "omega", cat: "rendimiento", name: "Omega 3", tag: "EPA y DHA de aceite de pescado purificado.", badge: "Próximamente", soon: true,
-    detail: "Cápsulas blandas · EPA · DHA",
-    pack: { kind: "tin", body: ["#1D2730", "#3E4D5A", "#2B3742", "#18212A"], ink: "#D7DEE3", label: "OMEGA 3", sub: "60 cápsulas" } },
-  { id: "electrolitos", cat: "rendimiento", name: "Electrolitos", tag: "Hidratación sin azúcar añadida.", badge: "Próximamente", soon: true,
-    detail: "Polvo para disolver · sabor natural · 30 porciones",
-    pack: { kind: "tin", body: ["#3A453C", "#6F7E70", "#55635A", "#333D35"], ink: "#E3E9E0", label: "ELECTROLITOS", sub: "30 porciones" } },
+  { id: "dia", cat: "dia", name: "Ritual Día", tag: "Colágeno, probióticos y vitaminas para empezar el día." },
+  { id: "noche", cat: "noche", name: "Ritual Noche", tag: "Colágeno, magnesio, cacao y reishi para cerrar el día." },
+  { id: "belleza", cat: "belleza", name: "Pelo · Uñas · Piel", tag: "Biotina, zinc, vitaminas y aminoácidos en cápsulas." },
+  { id: "creatina", cat: "rendimiento", name: "Creatina", tag: "Monohidrato puro, micronizado.", soon: true },
+  { id: "omega", cat: "rendimiento", name: "Omega 3", tag: "EPA y DHA de aceite de pescado purificado.", soon: true },
+  { id: "electrolitos", cat: "rendimiento", name: "Electrolitos", tag: "Hidratación sin azúcar añadida.", soon: true },
 ];
-
-const ARCO = `<g>
-  <path d="M18 112 V50 A32 32 0 0 1 82 50 V112" fill="none" stroke="currentColor" stroke-width="4"/>
-  <path d="M10 112 H90" stroke="currentColor" stroke-width="4"/>
-  <path d="M50 106 V44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-  <g fill="currentColor"><ellipse cx="50" cy="35" rx="3.4" ry="9"/>
-  <ellipse cx="42.5" cy="52" rx="3.2" ry="8.5" transform="rotate(-30 42.5 52)"/><ellipse cx="57.5" cy="52" rx="3.2" ry="8.5" transform="rotate(30 57.5 52)"/>
-  <ellipse cx="42.5" cy="68" rx="3.2" ry="8.5" transform="rotate(-30 42.5 68)"/><ellipse cx="57.5" cy="68" rx="3.2" ry="8.5" transform="rotate(30 57.5 68)"/>
-  <ellipse cx="42.5" cy="84" rx="3.2" ry="8.5" transform="rotate(-30 42.5 84)"/><ellipse cx="57.5" cy="84" rx="3.2" ry="8.5" transform="rotate(30 57.5 84)"/></g></g>`;
-
-let uid = 0;
-// Dibuja un envase (lata de aluminio o frasco marfil) en SVG
-function packSVG(p, cls = "pack") {
-  const id = "g" + (uid++);
-  const [a, b, c, d] = p.body;
-  const grad = `<linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="${a}"/><stop offset=".42" stop-color="${b}"/><stop offset=".6" stop-color="${c}"/><stop offset="1" stop-color="${d}"/></linearGradient>
-    <linearGradient id="${id}l" x1="0" x2="1"><stop offset="0" stop-color="#9C9993"/><stop offset=".4" stop-color="#EEEDEA"/><stop offset=".6" stop-color="#D6D4CF"/><stop offset="1" stop-color="#9C9993"/></linearGradient>`;
-  const fs = p.label.length > 12 ? 8.4 : 11;
-  if (p.kind === "bottle") {
-    return `<svg class="${cls}" viewBox="0 0 160 260" aria-hidden="true"><defs>${grad}</defs>
-      <rect x="44" y="18" width="72" height="40" rx="5" fill="url(#${id}l)"/>
-      <rect x="20" y="54" width="120" height="196" rx="22" fill="url(#${id})"/>
-      <g color="#4E5B4F"><svg x="66" y="88" width="28" height="34" viewBox="0 0 100 120">${ARCO}</svg></g>
-      <text x="80" y="142" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="11" letter-spacing="3" fill="${p.ink}">LIVÉNEA LAB</text>
-      <line x1="62" y1="152" x2="98" y2="152" stroke="#4E5B4F" stroke-width=".7"/>
-      <text x="80" y="172" text-anchor="middle" font-family="Jost, sans-serif" font-weight="500" font-size="${fs}" letter-spacing="1.6" fill="${p.ink}">${p.label}</text>
-      <text x="80" y="226" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="1.4" fill="${p.ink}" opacity=".7">${p.sub.toUpperCase()}</text>
-    </svg>`;
-  }
-  const h = p.tall ? 236 : 200, top = 260 - h - 8;
-  return `<svg class="${cls}" viewBox="0 0 160 260" aria-hidden="true"><defs>${grad}</defs>
-    <rect x="16" y="${top + 26}" width="128" height="${h - 26}" rx="6" fill="url(#${id})"/>
-    <rect x="13" y="${top}" width="134" height="36" rx="6" fill="url(#${id})"/>
-    <rect x="16" y="${top + 34}" width="128" height="1.4" fill="#000" opacity=".4"/>
-    <g color="${p.ink}" opacity=".85"><svg x="65" y="${top + 62}" width="30" height="36" viewBox="0 0 100 120">${ARCO}</svg></g>
-    <text x="80" y="${top + 120}" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="11" letter-spacing="3" fill="${p.ink}">LIVÉNEA LAB</text>
-    <line x1="62" y1="${top + 130}" x2="98" y2="${top + 130}" stroke="${p.ink}" stroke-width=".6" opacity=".6"/>
-    <text x="80" y="${top + 150}" text-anchor="middle" font-family="Jost, sans-serif" font-weight="500" font-size="${fs}" letter-spacing="2" fill="${p.ink}">${p.label}</text>
-    <text x="80" y="${top + h - 16}" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" letter-spacing="1.4" fill="${p.ink}" opacity=".7">${p.sub.toUpperCase()}</text>
-  </svg>`;
-}
-
-
 const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
-const icon = id => `<svg><use href="#${id}"/></svg>`;
+
+// Siluetas ficticias (sin fotos reales)
+const FIG = {
+  modelo: `<svg class="fig" viewBox="0 0 300 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <path d="M98 128c-6-62 110-74 108 0 4 52-4 104-10 150H108c-6-46-14-98-10-150Z" fill="#D9D5CE"/>
+    <rect x="133" y="176" width="34" height="56" rx="14" fill="#E4E1DB"/>
+    <ellipse cx="150" cy="128" rx="44" ry="56" fill="#E4E1DB"/>
+    <path d="M34 400c0-104 52-158 116-158s116 54 116 158Z" fill="#EAE7E2"/></svg>`,
+  producto: `<svg class="fig fig-prod" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <rect x="104" y="118" width="92" height="34" rx="5" fill="#DCD8D1"/>
+    <rect x="98" y="146" width="104" height="170" rx="8" fill="#E7E4DF"/>
+    <rect x="122" y="214" width="56" height="4" rx="2" fill="#D6D2CB"/>
+    <rect x="132" y="226" width="36" height="3" rx="1.5" fill="#D6D2CB"/>
+    <ellipse cx="150" cy="330" rx="74" ry="7" fill="#E9E7E3"/></svg>`,
+  conProducto: `<svg class="fig" viewBox="0 0 300 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <path d="M98 128c-6-62 110-74 108 0 4 52-4 104-10 150H108c-6-46-14-98-10-150Z" fill="#D9D5CE"/>
+    <rect x="133" y="176" width="34" height="56" rx="14" fill="#E4E1DB"/>
+    <ellipse cx="150" cy="128" rx="44" ry="56" fill="#E4E1DB"/>
+    <path d="M34 400c0-104 52-158 116-158s116 54 116 158Z" fill="#EAE7E2"/>
+    <rect x="196" y="262" width="44" height="16" rx="3" fill="#D3CFC8"/>
+    <rect x="192" y="274" width="52" height="80" rx="6" fill="#DFDBD5"/>
+    <ellipse cx="218" cy="352" rx="34" ry="16" fill="#E4E1DB"/></svg>`,
+};
+
+// Espacio en blanco con silueta y medida de la imagen
+function ph(kind, size, cls = "") {
+  return `<div class="ph ${cls}">${FIG[kind]}${size ? `<span class="ph-label">${size}</span>` : ""}</div>`;
+}
+document.querySelectorAll("[data-ph]").forEach(el => {
+  el.insertAdjacentHTML("afterbegin", ph(el.dataset.ph, el.dataset.size, el.dataset.phClass || ""));
+});
 
 // 5. Carrusel de productos con pestañas
 const prodTrack = document.getElementById("prod-track");
 prodTrack.innerHTML = PRODUCTS.map(p => `
   <article class="pcard" data-group="${p.soon ? "pronto" : "lanzamiento"}">
     <div class="pc-media">
+      ${ph("producto", "Producto · 1200 × 1500 px · 4:5 · fondo neutro", "label-top")}
       <span class="pc-badge">${p.soon ? "Próximamente" : "Lanzamiento | Lista de espera"}</span>
-      ${packSVG(p.pack)}
       <a class="pc-add" href="#newsletter" data-interest="${p.cat}">Avísame</a>
     </div>
     <div class="pc-info">
@@ -99,20 +75,20 @@ document.querySelectorAll(".arrows button").forEach(b => b.addEventListener("cli
   t.scrollBy({ left: w * Number(b.dataset.dir) });
 }));
 
-// 7. Historias verticales con producto
+// 7. Historias verticales (video o foto 9:16) con producto
 const STORIES = [
-  { img: "r-electro.jpg", cap: "La recarga llega en papel", prod: "electrolitos" },
-  { img: "r-creatina.jpg", cap: "Una lata para siempre", prod: "creatina" },
-  { img: "r-linea.jpg", cap: "Mañana, tarde y noche", prod: "dia", feat: true },
-  { img: "r-omega.jpg", cap: "Sobre el velador", prod: "omega" },
-  { img: "r-scoops.jpg", cap: "La medida justa", prod: "noche" },
+  { kind: "conProducto", cap: "Mi ritual de la mañana", prod: "dia" },
+  { kind: "modelo", cap: "Antes de dormir", prod: "noche" },
+  { kind: "conProducto", cap: "Lo que llevo en la cartera", prod: "belleza", feat: true },
+  { kind: "modelo", cap: "Después de entrenar", prod: "creatina" },
+  { kind: "conProducto", cap: "En la consulta", prod: "dia" },
 ];
 document.getElementById("stories-track").innerHTML = STORIES.map(s => {
   const p = byId[s.prod];
   return `<article class="story${s.feat ? " feat" : ""}">
-    <div class="story-media"><img src="/assets/${s.img}" alt="" loading="lazy"><p class="cap">${s.cap}</p></div>
+    <div class="story-media">${ph(s.kind, "Video o foto vertical · 1080 × 1920 px · 9:16")}<p class="cap">${s.cap}</p></div>
     <a class="chip" href="#newsletter" data-interest="${p.cat}">
-      <span class="chip-img">${packSVG(p.pack, "")}</span>
+      <span class="chip-img">${FIG.producto}</span>
       <span><b>${p.name}</b><span>${p.soon ? "Muy pronto" : "Lista de espera"}</span></span>
       <svg class="chev"><use href="#i-prev"/></svg>
     </a>
@@ -121,19 +97,16 @@ document.getElementById("stories-track").innerHTML = STORIES.map(s => {
 const st = document.getElementById("stories-track");
 requestAnimationFrame(() => { const f = st.querySelector(".feat"); if (f) st.scrollLeft = f.offsetLeft - (st.clientWidth - f.clientWidth) / 2; });
 
-// 8. Arte de los tiles
-document.querySelectorAll(".tile-art").forEach(t => { t.innerHTML = packSVG(byId[t.dataset.pack].pack, ""); });
-
 // 10. Journal
 const POSTS = [
-  { img: "r-creatina.jpg", min: 6, t: "Colágeno: qué dice la ciencia y qué no", ex: "Cuánto tomar, qué tipo elegir y cuánto tiempo esperar para notar cambios en la piel." },
-  { img: "r-omega.jpg", min: 5, t: "Magnesio y descanso: la guía corta", ex: "Las formas de magnesio no son iguales. Por qué elegimos bisglicinato para el Ritual Noche." },
-  { img: "r-electro.jpg", min: 7, t: "Tu microbiota también envejece", ex: "Fibra, probióticos y comida real: lo que sí cuenta para el largo plazo." },
-  { img: "linea-aluminio.jpg", min: 4, t: "Por qué elegimos aluminio rellenable", ex: "Un envase que dura años y recargas de papel: menos residuos en cada compra." },
+  { kind: "modelo", min: 6, t: "Colágeno: qué dice la ciencia y qué no", ex: "Cuánto tomar, qué tipo elegir y cuánto tiempo esperar para notar cambios en la piel." },
+  { kind: "conProducto", min: 5, t: "Magnesio y descanso: la guía corta", ex: "Las formas de magnesio no son iguales. Por qué elegimos bisglicinato para el Ritual Noche." },
+  { kind: "modelo", min: 7, t: "Tu microbiota también envejece", ex: "Fibra, probióticos y comida real: lo que sí cuenta para el largo plazo." },
+  { kind: "producto", min: 4, t: "Por qué elegimos aluminio rellenable", ex: "Un envase que dura años y recargas de papel: menos residuos en cada compra." },
 ];
 document.getElementById("journal-track").innerHTML = POSTS.map(p => `
   <article class="jcard">
-    <div class="j-img"><img src="/assets/${p.img}" alt="" loading="lazy"></div>
+    <div class="j-img">${ph(p.kind, "Journal · 1200 × 1500 px · 4:5")}</div>
     <div class="j-body">
       <p class="j-meta">${p.min} min de lectura · Muy pronto</p>
       <h3 class="j-title">${p.t}</h3>
