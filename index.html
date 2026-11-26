@@ -8,11 +8,11 @@
 <meta property="og:title" content="Livénea Lab · Nutrición para la longevidad">
 <meta property="og:description" content="Rituales diarios de mañana, noche y belleza. Únete a la lista de espera.">
 <meta property="og:image" content="/assets/linea-aluminio.jpg">
-<meta name="theme-color" content="#F7F4EE">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Marcellus&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -33,248 +33,225 @@
         <ellipse cx="57.5" cy="84" rx="3.2" ry="8.5" transform="rotate(30 57.5 84)"/>
       </g>
     </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 21c1.2-4 4.4-6 8-6s6.8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
   </defs>
 </svg>
 
-<!-- Barra de anuncios -->
+<!-- 1. Barra de anuncios -->
 <div class="announce" role="region" aria-label="Anuncios">
-  <button class="announce-btn" data-dir="-1" aria-label="Anuncio anterior">‹</button>
-  <div class="announce-track">
-    <p class="is-active"><b>Lista de espera abierta</b> <span>|</span> <a href="#lista">Sé de las primeras en probarlo</a></p>
-    <p><b>Muy pronto en clínicas NCA</b> <span>|</span> <a href="#clinicas">6 sucursales en Santiago</a></p>
-    <p><b>Membresía Livénea</b> <span>|</span> <a href="#membresia">Entrega automática y puntos en cada compra</a></p>
+  <button class="ann-btn" data-dir="-1" aria-label="Anuncio anterior"><svg><use href="#i-prev"/></svg></button>
+  <div class="ann-track">
+    <p class="on">Lista de espera abierta | <a href="#newsletter">Sé de las primeras en probarlo</a></p>
+    <p>Muy pronto en clínicas NCA | <a href="#clinicas">6 sucursales en Santiago</a></p>
+    <p>Membresía Livénea | <a href="#membresia">Entrega automática y puntos en cada compra</a></p>
   </div>
-  <button class="announce-btn" data-dir="1" aria-label="Anuncio siguiente">›</button>
+  <button class="ann-btn" data-dir="1" aria-label="Anuncio siguiente"><svg><use href="#i-next"/></svg></button>
 </div>
 
-<!-- Encabezado -->
-<header class="site-header">
-  <div class="header-inner">
-    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
-    <a class="brand" href="/" aria-label="Livénea Lab, inicio">
-      <svg class="brand-mark" aria-hidden="true"><use href="#arco"/></svg>
-      <span class="brand-word">LIVÉNEA LAB</span>
-    </a>
-    <nav id="nav" class="nav" aria-label="Principal">
+<!-- 2. Encabezado -->
+<header class="header">
+  <div class="header-left">
+    <button class="icon-btn only-mobile" id="menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="drawer"><svg><use href="#i-menu"/></svg></button>
+    <button class="icon-btn only-mobile" aria-label="Buscar"><svg><use href="#i-search"/></svg></button>
+    <nav class="nav only-desktop" aria-label="Principal">
       <a href="#tienda">Tienda</a>
       <a href="#rituales">Rituales</a>
-      <a href="#ciencia">Ciencia</a>
       <a href="#membresia">Membresía</a>
       <a href="#clinicas">Para clínicas</a>
       <a href="#journal">Journal</a>
+      <a href="#membresia">Puntos</a>
     </nav>
-    <div class="header-actions">
-      <a class="link-quiet hide-sm" href="#lista">Cuenta</a>
-      <a class="bag" href="#lista" aria-label="Bolsa, 0 productos">Bolsa <span class="bag-count">0</span></a>
-    </div>
+  </div>
+  <a class="logo" href="/" aria-label="Livénea Lab, inicio">LIVÉNEA LAB</a>
+  <div class="header-right">
+    <button class="icon-btn only-desktop" aria-label="Buscar"><svg><use href="#i-search"/></svg></button>
+    <a class="icon-btn" href="#newsletter" aria-label="Cuenta"><svg><use href="#i-user"/></svg></a>
+    <a class="icon-btn bag" href="#newsletter" aria-label="Bolsa, 0 productos"><svg><use href="#i-bag"/></svg><span>0</span></a>
   </div>
 </header>
+<nav class="drawer" id="drawer" aria-label="Menú móvil">
+  <a href="#tienda">Tienda</a>
+  <a href="#rituales">Rituales</a>
+  <a href="#membresia">Membresía y puntos</a>
+  <a href="#clinicas">Para clínicas</a>
+  <a href="#journal">Journal</a>
+</nav>
 
 <main>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Nutrición para la longevidad</p>
-    <h1>Longevidad que se toma a diario.</h1>
-    <p class="lede">Rituales de mañana, de noche y de belleza, con pocas fórmulas y bien hechas. Formulados en Chile y pensados junto a profesionales de clínica estética.</p>
-    <div class="cta-row">
-      <a class="btn btn-solid" href="#lista">Únete a la lista de espera</a>
-      <a class="btn btn-line" href="#tienda">Ver los rituales</a>
+<!-- 3. Hero (slideshow) -->
+<section class="hero" aria-roledescription="carrusel">
+  <div class="slide on s1">
+    <svg class="slide-mark" aria-hidden="true"><use href="#arco"/></svg>
+    <div class="slide-copy">
+      <p class="kicker">Nutrición para la longevidad</p>
+      <h1>Longevidad que se toma a diario</h1>
+      <p class="sub">Rituales de mañana, noche y belleza</p>
+      <p class="small">Únete a la lista de espera y recibe un beneficio de lanzamiento.</p>
+      <a class="btn-white" href="#newsletter">Unirme</a>
     </div>
   </div>
-  <figure class="hero-media">
-    <img src="/assets/linea-aluminio.jpg" alt="Latas de aluminio anodizado de Livénea Lab en grafito, arena y salvia" width="1600" height="1100" fetchpriority="high">
-  </figure>
+  <div class="slide s2">
+    <img src="/assets/r-linea.jpg" alt="" aria-hidden="true">
+    <div class="slide-copy">
+      <p class="kicker">Membresía Livénea</p>
+      <h1>Tu ritual, sin pensar en reponerlo</h1>
+      <p class="sub">Entrega automática y puntos en cada compra</p>
+      <a class="btn-white" href="#membresia">Conocer más</a>
+    </div>
+  </div>
+  <div class="dots" role="tablist">
+    <button class="on" aria-label="Diapositiva 1"></button>
+    <button aria-label="Diapositiva 2"></button>
+  </div>
 </section>
 
-<!-- Franja de confianza -->
-<section class="trust" aria-label="Por qué Livénea">
-  <ul>
-    <li>Formulado en Chile con laboratorio especializado</li>
-    <li>5 g de colágeno en cada blend</li>
-    <li>Pensado junto a profesionales de clínica estética</li>
-    <li>Envases de aluminio rellenables</li>
-  </ul>
+<!-- 4. Franja de confianza (marquesina) -->
+<section class="marquee big" aria-label="Por qué Livénea">
+  <div class="mq-track">
+    <span>Formulado en Chile con laboratorio especializado</span>
+    <span>5 g de colágeno en cada blend</span>
+    <span>Pensado junto a clínicas estéticas</span>
+    <span>Envases de aluminio rellenables</span>
+    <span aria-hidden="true">Formulado en Chile con laboratorio especializado</span>
+    <span aria-hidden="true">5 g de colágeno en cada blend</span>
+    <span aria-hidden="true">Pensado junto a clínicas estéticas</span>
+    <span aria-hidden="true">Envases de aluminio rellenables</span>
+  </div>
 </section>
 
-<!-- Carrusel de productos -->
-<section class="shop" id="tienda">
-  <div class="section-head">
+<!-- 5. Productos -->
+<section class="products" id="tienda">
+  <div class="sec-head">
     <div>
-      <p class="eyebrow">Primera colección</p>
-      <h2>Los rituales de lanzamiento</h2>
+      <h2 class="h-caps">Compra los rituales</h2>
+      <div class="tabs" role="tablist">
+        <button class="on" data-tab="todos">Todos</button>
+        <button data-tab="lanzamiento">Lanzamiento</button>
+        <button data-tab="pronto">Próximamente</button>
+      </div>
     </div>
-    <div class="carousel-ctrl">
-      <button class="round" data-scroll="-1" aria-label="Anterior">‹</button>
-      <button class="round" data-scroll="1" aria-label="Siguiente">›</button>
-      <a class="link-quiet" href="#lista">Ver todo</a>
+    <div class="arrows">
+      <button data-target="prod-track" data-dir="-1" aria-label="Anterior"><svg><use href="#i-prev"/></svg></button>
+      <button data-target="prod-track" data-dir="1" aria-label="Siguiente"><svg><use href="#i-next"/></svg></button>
     </div>
   </div>
-  <div class="carousel" id="carousel" tabindex="0" aria-label="Productos"></div>
+  <div class="track prod-track" id="prod-track"></div>
+  <a class="link-under view-all" href="#newsletter">Ver todo</a>
 </section>
 
-<!-- Ingredientes (equivalente a la fila de prensa) -->
-<section class="ingredients" id="ciencia" aria-label="Ingredientes">
-  <p class="eyebrow center">Ingredientes que se pueden nombrar</p>
-  <ul>
-    <li>Colágeno hidrolizado</li>
-    <li>Magnesio bisglicinato</li>
-    <li>Probióticos de 14 cepas</li>
-    <li>Biotina y zinc</li>
-    <li>Coenzima Q<span class="lining">10</span></li>
-    <li>Cacao y reishi</li>
-  </ul>
-</section>
-
-<!-- Accesos por momento -->
-<nav class="pills" id="rituales" aria-label="Comprar por momento">
-  <a href="#tienda" data-filter="dia">Mañana</a>
-  <a href="#tienda" data-filter="noche">Noche</a>
-  <a href="#tienda" data-filter="belleza">Belleza</a>
-  <a href="#tienda" data-filter="rendimiento">Rendimiento</a>
-</nav>
-
-<!-- Bloque destacado 1 -->
-<section class="feature">
-  <div class="feature-media tins-duo" aria-hidden="true"></div>
-  <div class="feature-copy">
-    <p class="eyebrow">Esto es longevidad</p>
-    <h2>Un ritual para empezar el día y otro para cerrarlo.</h2>
-    <p>El <b>Ritual Día</b> combina colágeno, probióticos, vitaminas y antioxidantes en un polvo que se disuelve en agua. El <b>Ritual Noche</b> reúne colágeno, magnesio, cacao y reishi para bajar el ritmo antes de dormir. Dos momentos, una misma rutina que se sostiene en el tiempo.</p>
-    <a class="btn btn-line" href="#tienda">Descubrir los rituales</a>
+<!-- 6. Ingredientes (marquesina, en lugar de logos de prensa) -->
+<section class="marquee logos" aria-label="Ingredientes">
+  <div class="mq-track">
+    <span>Colágeno hidrolizado</span><i>•</i><span>Magnesio bisglicinato</span><i>•</i><span>Probióticos de 14 cepas</span><i>•</i><span>Biotina y zinc</span><i>•</i><span>Coenzima Q10</span><i>•</i><span>Cacao y reishi</span><i>•</i><span>Vitamina D3</span><i>•</i>
+    <span aria-hidden="true">Colágeno hidrolizado</span><i>•</i><span aria-hidden="true">Magnesio bisglicinato</span><i>•</i><span aria-hidden="true">Probióticos de 14 cepas</span><i>•</i><span aria-hidden="true">Biotina y zinc</span><i>•</i><span aria-hidden="true">Coenzima Q10</span><i>•</i><span aria-hidden="true">Cacao y reishi</span><i>•</i><span aria-hidden="true">Vitamina D3</span><i>•</i>
   </div>
 </section>
 
-<!-- Bloque destacado 2 -->
-<section class="feature feature-dark" id="clinicas">
-  <div class="feature-copy">
-    <p class="eyebrow">Nace en la clínica</p>
-    <h2>De la consulta estética a tu casa.</h2>
-    <p>Livénea Lab nace junto a NCA, una clínica de estética con seis sucursales en Santiago. Lo que trabajas en la camilla lo acompañas cada día desde adentro, con la recomendación de tu profesional.</p>
-    <p class="muted">¿Tienes una clínica o un centro? Trabajamos con programas para profesionales, con material de apoyo y condiciones especiales.</p>
-    <a class="btn btn-light" href="#lista" data-interest="clinica">Quiero venderlo en mi clínica</a>
+<!-- 7. Tarjetas verticales con producto -->
+<section class="stories" aria-label="El ritual en casa">
+  <div class="track stories-track" id="stories-track"></div>
+</section>
+
+<!-- 8. Accesos por categoría -->
+<section class="tiles" id="rituales" aria-label="Comprar por ritual">
+  <a class="tile t1" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="dia"></span><span class="tile-label">Ritual Día</span></a>
+  <a class="tile t2" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="noche"></span><span class="tile-label">Ritual Noche</span></a>
+  <a class="tile t3" href="#tienda" data-tab="lanzamiento"><span class="tile-art" data-pack="belleza"></span><span class="tile-label">Pelo · Uñas · Piel</span></a>
+  <a class="tile t4" href="#tienda" data-tab="pronto"><span class="tile-art" data-pack="creatina"></span><span class="tile-label">Rendimiento</span></a>
+</section>
+
+<!-- 9. Bloque editorial en dos columnas -->
+<section class="editorial" id="clinicas">
+  <div class="ed-big">
+    <div class="ed-frame">
+      <img src="/assets/r-caja.jpg" alt="Exhibidor de Livénea Lab con la línea completa bajo un arco de aluminio" loading="lazy">
+    </div>
+    <p class="ed-kicker">Esto es longevidad</p>
+    <p class="ed-line">Nace junto a NCA, una clínica estética con seis sucursales en Santiago.</p>
+    <a class="link-under light" href="#newsletter">Quiero venderlo en mi clínica</a>
   </div>
-  <div class="feature-media arch-art" aria-hidden="true">
-    <svg viewBox="0 0 100 120"><use href="#arco"/></svg>
+  <div class="ed-small" id="membresia">
+    <img src="/assets/r-electro.jpg" alt="Latas de electrolitos con sobres de recarga de papel" loading="lazy">
+    <p class="ed-kicker dark">Rellena. No reemplaces.</p>
+    <p class="ed-text">Tu lata de aluminio es para siempre. Con la membresía recibes recargas de papel en casa, pausas cuando quieras y sumas puntos en cada compra.</p>
+    <a class="link-under" href="#newsletter">Unirme a la lista</a>
   </div>
 </section>
 
-<!-- Membresía -->
-<section class="membership" id="membresia">
-  <div class="section-head center">
-    <p class="eyebrow">Membresía Livénea</p>
-    <h2>Tu ritual, sin pensar en reponerlo.</h2>
-  </div>
-  <ol class="steps">
-    <li><span class="num">01</span><h3>Elige tus rituales</h3><p>Uno o varios, y la frecuencia que te acomode.</p></li>
-    <li><span class="num">02</span><h3>Recíbelos en casa</h3><p>Entrega automática y recargas de papel para tu lata de aluminio.</p></li>
-    <li><span class="num">03</span><h3>Suma puntos</h3><p>Cada compra suma puntos canjeables por productos y experiencias.</p></li>
-  </ol>
-  <p class="center small muted">Pausa, cambia o cancela cuando quieras. Precios y beneficios de la membresía se anuncian en el lanzamiento.</p>
-</section>
-
-<!-- Journal -->
+<!-- 10. Journal -->
 <section class="journal" id="journal">
-  <div class="section-head">
-    <div>
-      <p class="eyebrow">Journal</p>
-      <h2>Ciencia, sin promesas milagrosas</h2>
+  <div class="sec-head">
+    <h2 class="h-caps">Journal</h2>
+    <div class="arrows">
+      <button data-target="journal-track" data-dir="-1" aria-label="Anterior"><svg><use href="#i-prev"/></svg></button>
+      <button data-target="journal-track" data-dir="1" aria-label="Siguiente"><svg><use href="#i-next"/></svg></button>
     </div>
   </div>
-  <div class="journal-grid">
-    <article>
-      <div class="j-img j1" aria-hidden="true"></div>
-      <p class="meta">6 min de lectura</p>
-      <h3>Colágeno: qué dice la ciencia y qué no</h3>
-      <p>Cuánto tomar, qué tipo elegir y cuánto tiempo esperar para notar cambios.</p>
-      <span class="soon">Muy pronto</span>
-    </article>
-    <article>
-      <div class="j-img j2" aria-hidden="true"></div>
-      <p class="meta">5 min de lectura</p>
-      <h3>Magnesio y descanso: la guía corta</h3>
-      <p>Las formas de magnesio no son iguales. Por qué usamos bisglicinato.</p>
-      <span class="soon">Muy pronto</span>
-    </article>
-    <article>
-      <div class="j-img j3" aria-hidden="true"></div>
-      <p class="meta">7 min de lectura</p>
-      <h3>Tu microbiota también envejece</h3>
-      <p>Fibra, probióticos y comida real: lo que sí cuenta para el largo plazo.</p>
-      <span class="soon">Muy pronto</span>
-    </article>
-  </div>
+  <div class="track journal-track" id="journal-track"></div>
 </section>
 
-<!-- Cinta -->
-<div class="ribbon" aria-hidden="true">
-  <div class="ribbon-track">
-    <span>Envases de aluminio rellenables</span><i>·</i><span>Recargas de papel</span><i>·</i><span>Sin azúcar añadida</span><i>·</i><span>Formulado en Chile</span><i>·</i>
-    <span>Envases de aluminio rellenables</span><i>·</i><span>Recargas de papel</span><i>·</i><span>Sin azúcar añadida</span><i>·</i><span>Formulado en Chile</span><i>·</i>
-  </div>
-</div>
-
-<!-- Lista de espera -->
-<section class="waitlist" id="lista">
-  <div class="waitlist-inner">
-    <svg class="wl-mark" aria-hidden="true"><use href="#arco"/></svg>
-    <p class="eyebrow">Únete al círculo</p>
-    <h2>Sé de las primeras en probarlo.</h2>
-    <p>Te avisamos del lanzamiento antes que a nadie, con un beneficio para quienes estén en la lista.</p>
-    <form id="waitlist-form" novalidate>
-      <label class="sr" for="wl-email">Correo electrónico</label>
-      <input id="wl-email" name="email" type="email" placeholder="Tu correo" autocomplete="email" required>
-      <label class="sr" for="wl-interest">Me interesa</label>
-      <select id="wl-interest" name="interest">
-        <option value="general">Me interesa todo</option>
-        <option value="dia">Ritual Día</option>
-        <option value="noche">Ritual Noche</option>
-        <option value="belleza">Pelo · Uñas · Piel</option>
-        <option value="rendimiento">Creatina, omega 3 o electrolitos</option>
-        <option value="clinica">Soy una clínica o centro</option>
-      </select>
-      <button class="btn btn-solid" type="submit">Unirme</button>
-    </form>
-    <p class="form-msg" id="wl-msg" role="status" aria-live="polite"></p>
-  </div>
+<!-- 11. Íconos de confianza -->
+<section class="trust-row" aria-label="Beneficios">
+  <p>Beneficio de lanzamiento para la lista de espera</p>
+  <p>Envases de aluminio rellenables</p>
+  <p>Membresía | Entrega automática y puntos</p>
 </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-cols">
-    <div class="f-brand">
-      <a class="brand" href="/" aria-label="Livénea Lab, inicio">
-        <svg class="brand-mark" aria-hidden="true"><use href="#arco"/></svg>
-        <span class="brand-word">LIVÉNEA LAB</span>
-      </a>
-      <p>Nutrición para la longevidad. Santiago de Chile.</p>
-    </div>
-    <div>
+<!-- 12. Footer -->
+<footer class="footer" id="newsletter">
+  <div class="f-grid">
+    <div class="f-col">
       <h4>Ayuda</h4>
-      <a href="#lista">Contacto</a>
-      <a href="#lista">Envíos y devoluciones</a>
-      <a href="#lista">Preguntas frecuentes</a>
-      <a href="#lista">Privacidad</a>
+      <a href="#newsletter">Contacto</a>
+      <a href="#newsletter">Preguntas frecuentes</a>
+      <a href="#newsletter">Envíos y devoluciones</a>
+      <a href="#clinicas">Quiero venderlo en mi clínica</a>
+      <a href="#newsletter">Privacidad</a>
+      <a href="#newsletter">Términos y condiciones</a>
     </div>
-    <div>
+    <div class="f-col">
       <h4>Explora</h4>
-      <a href="#membresia">Membresía y puntos</a>
-      <a href="#clinicas">Para clínicas</a>
-      <a href="#ciencia">Ciencia</a>
+      <a href="#membresia">Puntos</a>
+      <a href="#membresia">Membresía</a>
+      <a href="#clinicas">Clínicas</a>
       <a href="#journal">Journal</a>
     </div>
-    <div>
+    <div class="f-col">
       <h4>Síguenos</h4>
-      <a href="#lista">Instagram</a>
-      <a href="#lista">TikTok</a>
+      <a href="#newsletter">Instagram</a>
+      <a href="#newsletter">TikTok</a>
+    </div>
+    <div class="f-news">
+      <form id="waitlist-form" novalidate>
+        <label class="sr" for="wl-email">Correo electrónico</label>
+        <input id="wl-email" name="email" type="email" placeholder="Correo electrónico" autocomplete="email" required>
+        <input type="hidden" name="interest" id="wl-interest" value="general">
+        <button type="submit">Unirme</button>
+      </form>
+      <h4>Únete al círculo</h4>
+      <p>Súmate a la lista de espera: te avisamos del lanzamiento antes que a nadie, con un beneficio de bienvenida, y te enviamos consejos de bienestar y longevidad.</p>
+      <p class="form-msg" id="wl-msg" role="status" aria-live="polite"></p>
+      <p class="copy">© <span id="year">2026</span> Livénea Lab SpA</p>
+    </div>
+    <div class="f-badge" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <defs><path id="circ" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs>
+        <text font-family="Jost, sans-serif" font-size="9.5" letter-spacing="3.2" fill="currentColor"><textPath href="#circ">FORMULADO EN CHILE · LONGEVIDAD ·</textPath></text>
+        <use href="#arco" x="46" y="42" width="28" height="34"/>
+      </svg>
+      <p class="country">Chile</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© <span id="year">2026</span> Livénea Lab SpA</p>
-    <p class="legal">Suplementos alimentarios. No reemplazan una alimentación variada y equilibrada ni un estilo de vida saludable. Consulta a tu profesional de salud si estás embarazada, en lactancia o tomas medicamentos.</p>
-  </div>
+  <p class="legal">Suplementos alimentarios. No reemplazan una alimentación variada y equilibrada ni un estilo de vida saludable. Consulta a tu profesional de salud si estás embarazada, en lactancia o tomas medicamentos.</p>
+  <div class="f-word" aria-hidden="true">LIVÉNEA LAB</div>
 </footer>
 
 <script src="/main.js" defer></script>

@@ -32,7 +32,7 @@ const ARCO = `<g>
 
 let uid = 0;
 // Dibuja un envase (lata de aluminio o frasco marfil) en SVG
-function packSVG(p, cls = "tin") {
+function packSVG(p, cls = "pack") {
   const id = "g" + (uid++);
   const [a, b, c, d] = p.body;
   const grad = `<linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="${a}"/><stop offset=".42" stop-color="${b}"/><stop offset=".6" stop-color="${c}"/><stop offset="1" stop-color="${d}"/></linearGradient>
@@ -62,70 +62,124 @@ function packSVG(p, cls = "tin") {
   </svg>`;
 }
 
-// Carrusel de productos
-const carousel = document.getElementById("carousel");
-carousel.innerHTML = PRODUCTS.map(p => `
-  <article class="card" data-cat="${p.cat}">
-    <div class="card-media">
-      <span class="badge${p.soon ? " soon" : ""}">${p.badge}</span>
+
+const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+const icon = id => `<svg><use href="#${id}"/></svg>`;
+
+// 5. Carrusel de productos con pestañas
+const prodTrack = document.getElementById("prod-track");
+prodTrack.innerHTML = PRODUCTS.map(p => `
+  <article class="pcard" data-group="${p.soon ? "pronto" : "lanzamiento"}">
+    <div class="pc-media">
+      <span class="pc-badge">${p.soon ? "Próximamente" : "Lanzamiento | Lista de espera"}</span>
       ${packSVG(p.pack)}
-      <div class="alt" style="background:${p.pack.body[3]}"><p><b>${p.name}</b>${p.detail}</p></div>
+      <a class="pc-add" href="#newsletter" data-interest="${p.cat}">Avísame</a>
     </div>
-    <h3>${p.name}</h3>
-    <p class="tag">${p.tag}</p>
-    <p class="price">${p.soon ? "Muy pronto" : "Precio: muy pronto"}</p>
-    <a class="btn ${p.soon ? "btn-line" : "btn-solid"}" href="#lista" data-interest="${p.cat}">Avísame</a>
+    <div class="pc-info">
+      <h3 class="pc-name">${p.name}</h3>
+      <p class="pc-tag">${p.tag}</p>
+      <div class="pc-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="pc-price">${p.soon ? "Muy pronto" : "Precio de lanzamiento: muy pronto"}</p>
+    </div>
   </article>`).join("");
 
-document.querySelectorAll("[data-scroll]").forEach(b => b.addEventListener("click", () => {
-  const card = carousel.querySelector(".card");
-  const step = card ? card.getBoundingClientRect().width + 20 : 300;
-  carousel.scrollBy({ left: step * Number(b.dataset.scroll), behavior: "smooth" });
+function setTab(tab) {
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  prodTrack.querySelectorAll(".pcard").forEach(c => { c.hidden = tab !== "todos" && c.dataset.group !== tab; });
+  prodTrack.scrollLeft = 0;
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
+document.querySelectorAll(".tile[data-tab]").forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
+
+// Flechas de los carruseles
+document.querySelectorAll(".arrows button").forEach(b => b.addEventListener("click", () => {
+  const t = document.getElementById(b.dataset.target);
+  const card = [...t.children].find(c => !c.hidden);
+  const w = card ? card.getBoundingClientRect().width : 300;
+  t.scrollBy({ left: w * Number(b.dataset.dir) });
 }));
 
-// Bloque destacado: Día + Noche
-document.querySelector(".tins-duo").innerHTML = packSVG(PRODUCTS[0].pack, "") + packSVG(PRODUCTS[1].pack, "");
+// 7. Historias verticales con producto
+const STORIES = [
+  { img: "r-electro.jpg", cap: "La recarga llega en papel", prod: "electrolitos" },
+  { img: "r-creatina.jpg", cap: "Una lata para siempre", prod: "creatina" },
+  { img: "r-linea.jpg", cap: "Mañana, tarde y noche", prod: "dia", feat: true },
+  { img: "r-omega.jpg", cap: "Sobre el velador", prod: "omega" },
+  { img: "r-scoops.jpg", cap: "La medida justa", prod: "noche" },
+];
+document.getElementById("stories-track").innerHTML = STORIES.map(s => {
+  const p = byId[s.prod];
+  return `<article class="story${s.feat ? " feat" : ""}">
+    <div class="story-media"><img src="/assets/${s.img}" alt="" loading="lazy"><p class="cap">${s.cap}</p></div>
+    <a class="chip" href="#newsletter" data-interest="${p.cat}">
+      <span class="chip-img">${packSVG(p.pack, "")}</span>
+      <span><b>${p.name}</b><span>${p.soon ? "Muy pronto" : "Lista de espera"}</span></span>
+      <svg class="chev"><use href="#i-prev"/></svg>
+    </a>
+  </article>`;
+}).join("");
+const st = document.getElementById("stories-track");
+requestAnimationFrame(() => { const f = st.querySelector(".feat"); if (f) st.scrollLeft = f.offsetLeft - (st.clientWidth - f.clientWidth) / 2; });
 
-// Píldoras por momento: resaltan los productos de esa categoría
-document.querySelectorAll(".pills a").forEach(a => a.addEventListener("click", () => {
-  const f = a.dataset.filter;
-  const on = !a.classList.contains("on");
-  document.querySelectorAll(".pills a").forEach(x => x.classList.remove("on"));
-  if (on) a.classList.add("on");
-  carousel.querySelectorAll(".card").forEach(c => c.classList.toggle("dim", on && c.dataset.cat !== f));
-  const first = carousel.querySelector(`.card[data-cat="${f}"]`);
-  if (on && first) setTimeout(() => carousel.scrollTo({ left: first.offsetLeft - carousel.offsetLeft - 16, behavior: "smooth" }), 400);
-}));
+// 8. Arte de los tiles
+document.querySelectorAll(".tile-art").forEach(t => { t.innerHTML = packSVG(byId[t.dataset.pack].pack, ""); });
 
-// Botones "Avísame" preseleccionan el interés en el formulario
+// 10. Journal
+const POSTS = [
+  { img: "r-creatina.jpg", min: 6, t: "Colágeno: qué dice la ciencia y qué no", ex: "Cuánto tomar, qué tipo elegir y cuánto tiempo esperar para notar cambios en la piel." },
+  { img: "r-omega.jpg", min: 5, t: "Magnesio y descanso: la guía corta", ex: "Las formas de magnesio no son iguales. Por qué elegimos bisglicinato para el Ritual Noche." },
+  { img: "r-electro.jpg", min: 7, t: "Tu microbiota también envejece", ex: "Fibra, probióticos y comida real: lo que sí cuenta para el largo plazo." },
+  { img: "linea-aluminio.jpg", min: 4, t: "Por qué elegimos aluminio rellenable", ex: "Un envase que dura años y recargas de papel: menos residuos en cada compra." },
+];
+document.getElementById("journal-track").innerHTML = POSTS.map(p => `
+  <article class="jcard">
+    <div class="j-img"><img src="/assets/${p.img}" alt="" loading="lazy"></div>
+    <div class="j-body">
+      <p class="j-meta">${p.min} min de lectura · Muy pronto</p>
+      <h3 class="j-title">${p.t}</h3>
+      <p class="j-ex">${p.ex}</p>
+      <a class="link-under" href="#newsletter">Leer más</a>
+    </div>
+  </article>`).join("");
+
+// Botones "Avísame" guardan el interés para la lista de espera
 const interest = document.getElementById("wl-interest");
 document.addEventListener("click", e => {
   const t = e.target.closest("[data-interest]");
   if (t && interest) interest.value = t.dataset.interest;
 });
 
-// Barra de anuncios rotativa
-const slides = [...document.querySelectorAll(".announce-track p")];
-let cur = 0, timer;
-function show(i) {
-  slides[cur].classList.remove("is-active");
-  cur = (i + slides.length) % slides.length;
-  slides[cur].classList.add("is-active");
-}
-function auto() { clearInterval(timer); timer = setInterval(() => show(cur + 1), 5000); }
-document.querySelectorAll(".announce-btn").forEach(b => b.addEventListener("click", () => { show(cur + Number(b.dataset.dir)); auto(); }));
-auto();
+// 1. Anuncios rotativos
+const ann = [...document.querySelectorAll(".ann-track p")];
+let ai = 0, at;
+const showAnn = i => { ann[ai].classList.remove("on"); ai = (i + ann.length) % ann.length; ann[ai].classList.add("on"); };
+const autoAnn = () => { clearInterval(at); at = setInterval(() => showAnn(ai + 1), 5000); };
+document.querySelectorAll(".ann-btn").forEach(b => b.addEventListener("click", () => { showAnn(ai + Number(b.dataset.dir)); autoAnn(); }));
+autoAnn();
+
+// 3. Slideshow del hero
+const slides = [...document.querySelectorAll(".slide")];
+const dots = [...document.querySelectorAll(".dots button")];
+let si = 0, stimer;
+const showSlide = i => {
+  slides[si].classList.remove("on"); dots[si].classList.remove("on");
+  si = (i + slides.length) % slides.length;
+  slides[si].classList.add("on"); dots[si].classList.add("on");
+};
+const autoSlide = () => { clearInterval(stimer); stimer = setInterval(() => showSlide(si + 1), 6500); };
+dots.forEach((d, i) => d.addEventListener("click", () => { showSlide(i); autoSlide(); }));
+autoSlide();
 
 // Menú móvil
-const toggle = document.querySelector(".menu-toggle");
-const nav = document.getElementById("nav");
-toggle.addEventListener("click", () => {
-  const open = nav.classList.toggle("open");
-  toggle.setAttribute("aria-expanded", String(open));
+const menuBtn = document.getElementById("menu-btn");
+const drawer = document.getElementById("drawer");
+menuBtn.addEventListener("click", () => {
+  const open = drawer.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(open));
 });
-nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }));
+drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { drawer.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }));
 
-// Lista de espera
+// Lista de espera (footer)
 const form = document.getElementById("waitlist-form");
 const msg = document.getElementById("wl-msg");
 form.addEventListener("submit", async e => {
